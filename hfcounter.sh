@@ -46,4 +46,6 @@ else
     date -u -d @${seconds_lela} +"In $(($seconds_lela/3600/24)) days %H hours %M minutes." >> temp.txt
 fi
 
+# Linebreak
+echo "" >> temp.txt
 echo "Last updated at: $(date -u)" >> temp.txt
