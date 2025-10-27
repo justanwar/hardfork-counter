@@ -15,16 +15,29 @@
 # HF block for Spark Name Transfer
 hf_block_sn=1205100
 
+# Block at which Lelantus redemption stops
+LELANTUS_GRACEFUL_PERIOD=1223500
+
 curr_block=$(firo-cli getblockcount)
 dist_sn=$(($hf_block_sn-$curr_block))
+dist_lela=$(($LELANTUS_GRACEFUL_PERIOD-$curr_block))
 
 if [ $dist_sn -le 0 ]; then
-    echo "HF block reached."
-    exit
+    echo "Spark Name hard fork block reached."
 else
-    echo "HF block is $hf_block_sn, $dist_sn blocks to go."
+    echo "Spark Name hard fork block is $hf_block_sn, $dist_sn blocks to go."
     # Assuming average of 150 seconds per block (2.5 minutes)
-    seconds=$((dist*150))
+    seconds=$((dist_sn*150))
 
     date -u -d @${seconds} +"In $(($seconds/3600/24)) days %H hours %M minutes."
+ 
+fi
+
+if [ $dist_lela -le 0 ]; then
+    echo "Lelantus redemption period ended."
+else
+    echo "Lelantus redemption ends at $LELANTUS_GRACEFUL_PERIOD, $dist_lela blocks to go."
+    seconds_lela=$((dist_lela*150))
+
+    date -u -d @${seconds_lela} +"In $(($seconds_lela/3600/24)) days %H hours %M minutes."
 fi
