@@ -13,16 +13,16 @@
 #fi
 
 # HF block for Spark Name Transfer
-hf_block=1205100
+hf_block_sn=1205100
 
 curr_block=$(firo-cli getblockcount)
-dist=$(($hf_block-$curr_block))
+dist_sn=$(($hf_block_sn-$curr_block))
 
-if [ $dist -le 0 ]; then
+if [ $dist_sn -le 0 ]; then
     echo "HF block reached."
     exit
 else
-    echo "HF block is $hf_block, $dist blocks to go."
+    echo "HF block is $hf_block_sn, $dist_sn blocks to go."
     # Assuming average of 150 seconds per block (2.5 minutes)
     seconds=$((dist*150))
 
