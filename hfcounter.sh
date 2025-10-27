@@ -16,9 +16,6 @@
 touch temp.txt
 > temp.txt
 
-# Clear html
-> index.html
-
 # HF block for Spark Name Transfer
 hf_block_sn=1205100
 
